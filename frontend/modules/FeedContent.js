@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 
-export default class EntryTitle extends React.Component {
+class EntryTitle extends React.Component {
   render() {
     return (
       <div className="title">
@@ -15,7 +15,8 @@ class EntryDescription extends React.Component {
   render() {
     var desc = this.props.desc;
     return (
-      <div className="description" dangerouslySetInnerHTML={{__html: desc}}>
+      <div className="description">
+        {this.props.desc}
       </div>
     );
   }
@@ -45,8 +46,7 @@ class Entry extends React.Component {
   }
 }
 
-class FeedContent extends React.Component {
-
+export default class FeedContent extends React.Component {
   render() {
     if (!this.props.feed || !this.props.feed.entries) return (<div>Loading...</div>);
 

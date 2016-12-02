@@ -1,10 +1,13 @@
 import React from 'react'
 import { render } from 'react-dom'
+import { Link } from 'react-router'
 
 export default class FeedListItem extends React.Component {
 	render() {
 		return (
-			<li><a href={this.props.url}>{this.props.name}</a></li>
+			<li>
+				<Link to={{ pathname: '/feed', query: { url: this.props.url } }} activeStyle={{ color: 'red' }}>{this.props.name}</Link>
+			</li>
 		)
 	}
 }
