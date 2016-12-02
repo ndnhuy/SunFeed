@@ -38,28 +38,28 @@ import com.sun.syndication.io.XmlReader;
 @RestController
 public class HelloController {
     
-	private ObjectMapper mapper = new ObjectMapper();
-	
-	@InitBinder
-	public void initBinder(final WebDataBinder binder) {
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZ");
-		dateFormat.setLenient(false);
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-	}
-	
+    private ObjectMapper mapper = new ObjectMapper();
+
+    @InitBinder
+    public void initBinder(final WebDataBinder binder) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZ");
+        dateFormat.setLenient(false);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+    }
+
     @SuppressWarnings("unchecked")
-	@RequestMapping("/")
+    @RequestMapping("/")
     public List<Map<String, String>> index() throws IllegalArgumentException, FeedException, IOException {
-    	URL url = new URL("http://www.javaworld.com/index.rss");
-    	SyndFeedInput input = new SyndFeedInput();
+        URL url = new URL("http://www.javaworld.com/index.rss");
+        SyndFeedInput input = new SyndFeedInput();
         SyndFeed feed = input.build(new XmlReader(url));
                 
         return (List<Map<String, String>>) feed.getEntries().stream().map( entryObject -> {
-        	SyndEntryImpl syndEntry = (SyndEntryImpl) entryObject;
-        	HashMap<String, String> titleToDesc = new HashMap<String, String>();
-        	titleToDesc.put("title", syndEntry.getTitle());
-        	titleToDesc.put("description", syndEntry.getDescription().getValue());
-        	return titleToDesc;
+            SyndEntryImpl syndEntry = (SyndEntryImpl) entryObject;
+            HashMap<String, String> titleToDesc = new HashMap<String, String>();
+            titleToDesc.put("title", syndEntry.getTitle());
+            titleToDesc.put("description", syndEntry.getDescription().getValue());
+            return titleToDesc;
         } ).collect(Collectors.toList());
         
 //        Map<String, String> titleToDesc = new HashMap<String, String>();
@@ -73,25 +73,25 @@ public class HelloController {
     @CrossOrigin(origins = "*")
     @GetMapping("/api/comments")
     public String getComments() throws IOException {
-    	byte[] encodedContent = Files.readAllBytes(Paths.get("D:\\Softs\\GitHub\\react-tutorial\\comments.json"));
-    	
-    	return new String(encodedContent, StandardCharsets.UTF_8);
+        byte[] encodedContent = Files.readAllBytes(Paths.get("D:\\Softs\\GitHub\\react-tutorial\\comments.json"));
+
+        return new String(encodedContent, StandardCharsets.UTF_8);
     }
     
     @CrossOrigin(origins = "*")
     @PostMapping("/api/comments")
     public String postComment(Comment comment) throws IOException {
-    	File commentsFile = new File("D:\\Softs\\GitHub\\react-tutorial\\comments.json");
-    	byte[] encodedContent = Files.readAllBytes(Paths.get(commentsFile.getAbsolutePath()));
-    	List<Comment> existingComments = mapper.readValue(new String(encodedContent, StandardCharsets.UTF_8), 
-    													  new TypeReference<List<Comment>>() {});
-    	
-    	comment.setId(new Date());
-    	existingComments.add(comment);
-    	
-    	FileWriter fileWriter = new FileWriter(commentsFile);
-    	fileWriter.write(mapper.writeValueAsString(existingComments));
-    	fileWriter.close();
-    	return "";
+        File commentsFile = new File("D:\\Softs\\GitHub\\react-tutorial\\comments.json");
+        byte[] encodedContent = Files.readAllBytes(Paths.get(commentsFile.getAbsolutePath()));
+        List<Comment> existingComments = mapper.readValue(new String(encodedContent, StandardCharsets.UTF_8),
+                                                          new TypeReference<List<Comment>>() {});
+
+        comment.setId(new Date());
+        existingComments.add(comment);
+
+        FileWriter fileWriter = new FileWriter(commentsFile);
+        fileWriter.write(mapper.writeValueAsString(existingComments));
+        fileWriter.close();
+        return "";
     }
 }
