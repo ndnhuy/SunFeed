@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
-import Home from './modules/Home'
-import FeedContentContainer from './modules/FeedContentContainer'
+import Home from './components/Home'
+import FeedContentContainer from './components/FeedContentContainer'
 import { Router, Route, hashHistory } from 'react-router'
 
 render ((

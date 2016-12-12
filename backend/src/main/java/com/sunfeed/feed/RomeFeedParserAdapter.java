@@ -22,14 +22,16 @@ import com.sun.syndication.io.XmlReader;
 public class RomeFeedParserAdapter implements SunFeedParser {
     private static final Logger logger = LoggerFactory.getLogger(RomeFeedParserAdapter.class);
 
+    private static final String REQUEST_USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) " +
+                                                    "AppleWebKit/537.36 (KHTML, like Gecko) " +
+                                                    "Chrome/54.0.2840.71 Safari/537.36";
     @Override
-    public SunFeed parse(String url) {
+    public List<SunEntry> parse(String url) {
         try {
             URLConnection conn;
             conn = new URL(url).openConnection();
             // add an 'user-agent' property to the request, otherwise get HTTP 403
-            conn.addRequestProperty("user-agent",
-                                    "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36");
+            conn.addRequestProperty("user-agent", REQUEST_USER_AGENT);
 
             SyndFeedInput input = new SyndFeedInput();
             SyndFeed feed = input.build(new XmlReader(conn));
@@ -45,7 +47,7 @@ public class RomeFeedParserAdapter implements SunFeedParser {
                 entries.add(entryDto);
             }
 
-            return new SunFeed(entries);
+            return entries;
         } catch (IllegalArgumentException e) {
             logger.error("Feed type could not be understood by any of the underlying parsers");
             throw new FeedParsingException();

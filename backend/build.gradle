@@ -1,14 +1,14 @@
 buildscript {
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.0.RELEASE")
-	}
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.0.RELEASE")
+    }
 }
 
 task wrapper(type: Wrapper) {
-	gradleVersion = '3.0'
+    gradleVersion = '3.0'
 }
 
 apply plugin: 'java'
@@ -17,26 +17,27 @@ apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
 jar {
-	baseName = 'sunfeed'
-	version = '0.1.0'
+    baseName = 'sunfeed'
+    version = '0.1.0'
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-	compile("org.springframework.boot:spring-boot-starter-web") {
-		exclude module: "spring-boot-starter-tomcat"
-	}
+    compile("org.springframework.boot:spring-boot-starter-web") {
+        exclude module: "spring-boot-starter-tomcat"
+    }
 
-	compile("org.springframework.boot:spring-boot-starter-jetty")
-	compile("org.springframework.boot:spring-boot-starter-actuator")
-	compile('org.springframework.boot:spring-boot-starter-test')
-	
-	compile("rome:rome:1.0")
-	testCompile("junit:junit")
+    compile("org.springframework.boot:spring-boot-starter-jetty")
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    compile('org.springframework.boot:spring-boot-starter-test')
+
+    compile("rome:rome:1.0")
+    compile("org.jsoup:jsoup:1.10.1")
+    testCompile("junit:junit")
 }

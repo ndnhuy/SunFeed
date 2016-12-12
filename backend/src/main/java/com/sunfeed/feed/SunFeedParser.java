@@ -1,5 +1,7 @@
 package com.sunfeed.feed;
 
+import java.util.List;
+
 public interface SunFeedParser {
-    SunFeed parse(String url);
+    List<SunEntry> parse(String url);
 }
