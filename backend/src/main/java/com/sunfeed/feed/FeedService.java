@@ -14,11 +14,17 @@ public class FeedService {
     private static final Logger logger = LoggerFactory.getLogger(FeedService.class);
     private SunFeedParser parser;
     private TimeProvider timeProvider;
+    private FeedRepository feedRepository;
 
     @Autowired
-    public FeedService(SunFeedParser parser, TimeProvider timeProvider) {
+    public FeedService(FeedRepository repo, SunFeedParser parser, TimeProvider timeProvider) {
         this.parser = parser;
         this.timeProvider = timeProvider;
+        this.feedRepository = repo;
+    }
+
+    public List<SunFeed> findAll() {
+        return feedRepository.findAll();
     }
 
     public List<SunEntry> search(String feedUrl, int descSize) {

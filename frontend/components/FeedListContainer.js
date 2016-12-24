@@ -1,15 +1,15 @@
 import React from 'react'
 import { render } from 'react-dom'
-import FeedListItem from './FeedListItem'
+import FeedList from './FeedList'
 import {API_URL} from '../constants/ApiConfig'
 
-export default class FeedList extends React.Component {
+export default class FeedListContainer extends React.Component {
 	constructor(props) {
 	    super(props);
 	    this.state = {feeds: null};
   	}
 
-	componentDidMount() {
+  	componentDidMount() {
   		$.ajax({
 	      url: API_URL + '/feeds',
 	      dataType: 'json',
@@ -23,19 +23,9 @@ export default class FeedList extends React.Component {
     	});
   	}
 
-	render() {
-		
-		if (!this.state.feeds) return (<p>Loading...</p>);
-
-		var rows = [];
-		this.state.feeds.forEach(function(item) {
-			rows.push(<FeedListItem url={item.url} name={item.name} />);
-		});
-
-		return (
-			<ul className="side-nav-bar">
-				{rows}
-			</ul>
-		);
-	}
+  	render() {
+  		return (
+  			<FeedList feeds = {this.state.feeds} />
+  		);
+  	}
 }

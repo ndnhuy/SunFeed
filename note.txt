@@ -1,0 +1,4 @@
+DialectFactoryImpl
+JdbcServicesImpl
+EntityManagerFactoryBuilderImpl
+SpringHibernateJpaPersistenceProvider

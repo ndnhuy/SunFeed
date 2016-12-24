@@ -1,5 +1,6 @@
 package com.sunfeed.feed;
 
+import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,11 @@ public class FeedController {
     @Autowired
     private FeedService feedService;
 
-
+    @GetMapping("")
+    public List<SunFeed> feeds() {
+        logger.info("Get all feeds");
+        return feedService.findAll();
+    }
 
     @GetMapping("/search")
     public List<SunEntry> getFeed(@RequestParam("url") String feedUrl, @RequestParam(name="descSize", required=false) Integer descSize) {
