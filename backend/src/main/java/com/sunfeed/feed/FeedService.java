@@ -13,13 +13,11 @@ public class FeedService {
 
     private static final Logger logger = LoggerFactory.getLogger(FeedService.class);
     private SunFeedParser parser;
-    private TimeProvider timeProvider;
     private FeedRepository feedRepository;
 
     @Autowired
-    public FeedService(FeedRepository repo, SunFeedParser parser, TimeProvider timeProvider) {
+    public FeedService(FeedRepository repo, SunFeedParser parser) {
         this.parser = parser;
-        this.timeProvider = timeProvider;
         this.feedRepository = repo;
     }
 

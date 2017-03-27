@@ -24,14 +24,13 @@ import org.junit.Test;
 public class FeedServiceTest {
 
     private SunFeedParser parser = mock(RomeFeedParserAdapter.class);
-    private TimeProvider timeProvider = mock(TimeProvider.class);
     private FeedRepository feedRepository = mock(FeedRepository.class);
 
     private FeedService feedService;
 
     @Before
     public void setup() {
-        feedService = new FeedService(feedRepository, parser, timeProvider);
+        feedService = new FeedService(feedRepository, parser);
     }
 
     @Test
@@ -41,7 +40,6 @@ public class FeedServiceTest {
 
         String url = "http://www.javaworld.com/index.rss";
         given(parser.parse(url)).willReturn(returnedEntries);
-        given(timeProvider.now()).willReturn(Instant.now());
 
         List<SunEntry> resultEntries = feedService.search(url, 1000);
         then(parser).should(times(1)).parse(url);
@@ -56,7 +54,6 @@ public class FeedServiceTest {
 
         String url = "http://www.javaworld.com/index.rss";
         given(parser.parse(url)).willReturn(returnedEntries);
-        given(timeProvider.now()).willReturn(Instant.now());
 
         List<SunEntry> resultEntries = feedService.search(url, 3);
         then(parser).should(times(1)).parse(url);
