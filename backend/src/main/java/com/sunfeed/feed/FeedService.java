@@ -30,9 +30,6 @@ public class FeedService {
     public List<SunEntry> search(String feedUrl, int descSize) {
         List<SunEntry> entries = parser.parse(feedUrl);
         for (SunEntry entry : entries) {
-            entry.setLifeTime( AmountOfTimeToString.between(entry.getPublishedDate().toInstant(),
-                    timeProvider.now()) );
-
             String descText = Jsoup.parse(entry.getDescription()).text();
             if (descSize > descText.length()) {
                 continue;

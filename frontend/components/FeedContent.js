@@ -28,7 +28,7 @@ class EntryMetadata extends React.Component {
       <div className="metadata">
         <span><b>{this.props.feedName}</b></span>
         <span> / </span>
-        <span><b>{this.props.lifeTime}</b></span>
+        <span><b>{moment(this.props.publishedDateMilli).toNow(true)}</b></span>
       </div>
     )
   }
@@ -40,7 +40,7 @@ class Entry extends React.Component {
       <div>
         <EntryTitle title={this.props.entry.title} />
         <EntryDescription desc={this.props.entry.description} />
-        <EntryMetadata feedName={this.props.entry.feedName} lifeTime={this.props.entry.lifeTime} />
+        <EntryMetadata feedName={this.props.entry.feedName} publishedDateMilli={this.props.entry.publishedDateMilli} />
       </div>
     );
   }

@@ -43,7 +43,7 @@ public class RomeFeedParserAdapter implements SunFeedParser {
                 SunEntry entryDto = new SunEntry(entry.getTitle(),
                                                  entry.getDescription().getValue(),
                                                  feed.getTitle(),
-                                                 entry.getPublishedDate());
+                                                 entry.getPublishedDate().toInstant());
                 entries.add(entryDto);
             }
 

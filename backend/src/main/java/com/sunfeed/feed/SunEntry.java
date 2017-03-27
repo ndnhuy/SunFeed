@@ -1,8 +1,8 @@
 package com.sunfeed.feed;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.time.Instant;
 
 public class SunEntry {
     private String title;
@@ -10,11 +10,10 @@ public class SunEntry {
     private String feedName;
 
     @JsonIgnore
-    private Date publishedDate;
+    private Instant publishedDate;
+    private long publishedDateMilli;
 
-    private String lifeTime;
-
-    public SunEntry(String title, String description, String feedName, Date pubDate) {
+    public SunEntry(String title, String description, String feedName, Instant pubDate) {
         super();
         this.title = title;
         this.description = description;
@@ -24,31 +23,40 @@ public class SunEntry {
     public String getTitle() {
         return title;
     }
+
     public void setTitle(String title) {
         this.title = title;
     }
+
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
+
     public String getFeedName() {
         return feedName;
     }
+
     public void setFeedName(String feedName) {
         this.feedName = feedName;
     }
-    public Date getPublishedDate() {
+
+    public Instant getPublishedDate() {
         return publishedDate;
     }
-    public void setPublishedDate(Date publishedDate) {
+
+    public void setPublishedDate(Instant publishedDate) {
         this.publishedDate = publishedDate;
     }
-    public String getLifeTime() {
-        return lifeTime;
+
+    public long getPublishedDateMilli() {
+        return this.publishedDateMilli;
     }
-    public void setLifeTime(String lifeTime) {
-        this.lifeTime = lifeTime;
+
+    public void setPublishedDateMilli(long milli) {
+        this.publishedDateMilli = milli;
     }
 }

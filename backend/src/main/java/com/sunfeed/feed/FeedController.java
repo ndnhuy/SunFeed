@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 @RestController
 @RequestMapping("/feeds")
 public class FeedController {
@@ -25,11 +27,20 @@ public class FeedController {
     @GetMapping("/search")
     public List<SunEntry> getFeed(@RequestParam("url") String feedUrl, @RequestParam(name="descSize", required=false) Integer descSize) {
         logger.info("Get feed with url: {}", feedUrl);
-        //https://www.javacodegeeks.com/feed/
-        if (descSize == null || descSize <= 0) {
-            return feedService.search(feedUrl, Integer.MAX_VALUE);
-        }
 
-        return feedService.search(feedUrl, descSize);
+        return feedService.search(feedUrl, descSize == null || descSize <= 0 ? Integer.MAX_VALUE : descSize)
+                          .stream()
+                          .map(entry -> {
+                              SunEntry newEntry = new SunEntry(entry.getTitle(), entry.getDescription(), entry.getFeedName(), entry.getPublishedDate());
+                              newEntry.setPublishedDateMilli(entry.getPublishedDate().toEpochMilli());
+                              return newEntry;
+                          })
+                          .collect(toList());
+
+//        if (descSize == null || descSize <= 0) {
+//            return feedService.search(feedUrl, Integer.MAX_VALUE);
+//        }
+//
+//        return feedService.search(feedUrl, descSize);
     }
 }

@@ -15,15 +15,15 @@ import javax.sql.DataSource;
 @Configuration
 public class BeanFactory {
 
-    @Bean
-    public DataSource dataSource(DataSourceProperties props) {
-        return DataSourceBuilder.create().
-                driverClassName("org.postgresql.Driver").
-                url("jdbc:postgresql://localhost:5432/SunFeedDB").
-                username("postgres").
-                password("123456").
-                build();
-    }
+//    @Bean
+//    public DataSource dataSource(DataSourceProperties props) {
+//        return DataSourceBuilder.create().
+//                driverClassName("org.postgresql.Driver").
+//                url("jdbc:postgresql://localhost:5432/SunFeedDB").
+//                username("postgres").
+//                password("123456").
+//                build();
+//    }
 
 //    @Bean
 //    public DataSourceTransactionManager dsm() {
