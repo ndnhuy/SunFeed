@@ -48,14 +48,14 @@ class Entry extends React.Component {
 
 export default class FeedContent extends React.Component {
   render() {
-    if (!this.props.entries) return (<div>Loading...</div>);
+    if (!this.props.entries) return (<div className='content'>Loading...</div>);
 
     var entries = [];
     this.props.entries.forEach(function(entry) {
       entries.push(<Entry entry={entry} />);
     });
     return (
-      <div>{entries}</div>
+      <div className='content'>{entries}</div>
     );
   };
 }

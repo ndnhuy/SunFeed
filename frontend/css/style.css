@@ -1,15 +1,36 @@
-html, body { 
-  margin:0; 
-  padding:0; 
-  height:100%; 
+html, body {
+  margin:0;
+  padding:0;
+  height:100%;
 }
 
-.side-nav-bar {
-	display: inline-block;
+ul.side-nav-bar {
+ 	width: 25%;
+ 	position: fixed;
+ 	height: 100%;
+ 	list-style-type: none;
+ 	margin: 0;
+ 	padding: 0;
+}
+
+.side-nav-bar li a {
+	display: block;
+	text-decoration: none;
+	color: #000;
+}
+
+.side-nav-bar li a:hover:not(.active) {
+	background-color: #555;
+	color: white;
+}
+
+.side-nav-bar a.active {
+	background-color: grey;
+	color: white;
 }
 
 .content {
-	display: inline-block;
+	margin-left: 25%;
 }
 
 #container {
