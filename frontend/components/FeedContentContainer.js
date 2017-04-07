@@ -9,10 +9,6 @@ export default class FeedContentContainer extends React.Component {
 	    this.state = {entries: null};
   	}
 
-	componentDidMount() {
-		this.loadFeed(API_URL + '/feeds/search?url=' + this.props.location.query.url + '&descSize=300');
-	}
-
 	componentWillReceiveProps(nextProps) {
 		if (this.props == nextProps) return;
 

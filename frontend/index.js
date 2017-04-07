@@ -5,9 +5,9 @@ import FeedContentContainer from './components/FeedContentContainer'
 import { Router, Route, hashHistory } from 'react-router'
 
 render ((
-	<Router history={hashHistory}>
-		<Route path="/" component={Home}>
-			<Route path="feed" component={FeedContentContainer} />
-		</Route>
-	</Router>
+    <Router history={hashHistory}>
+        <Route path="/" component={Home}>
+            <Route path="feed" component={FeedContentContainer} />
+        </Route>
+    </Router>
 ), document.getElementById('container'))
